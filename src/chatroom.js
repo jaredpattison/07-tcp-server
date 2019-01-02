@@ -2,24 +2,18 @@
 
 // First Party Modules
 const net = require('net');
+const events = require('./lib/events.js');
+const socketPool = require('./lib/socket-pool.js');
+const dm = require('./actions/dm.js');
 
-// Third Party Modules
-const uuid = require('uuid/v4');
+
 
 const port = process.env.PORT || 3001;
 const server = net.createServer();
-const socketPool = {};
+
 const commands = {};
 
-server.on('connection', (socket) => {
-  let id = uuid();
-  socketPool[id] = {
-    id:id,
-    nickname: `User-${id}`,
-    socket: socket,
-  };
-  socket.on('data', (buffer) => dispatchAction(id, buffer));
-});
+
 
 let parse = (buffer) => {
   let text = buffer.toString().trim();
@@ -34,17 +28,6 @@ let dispatchAction = (userId, buffer) => {
   if ( entry && typeof commands[entry.command] === 'function' ) {
     commands[entry.command](entry, userId);
   }
-};
-
-commands['@all'] =  (data, userId) => {
-  for( let connection in socketPool ) {
-    let user = socketPool[connection];
-    user.socket.write(`<${socketPool[userId].nickname}>: ${data.payload}\n`);
-  }
-};
-
-commands['@nick'] =  (data, userId) => {
-  socketPool[userId].nickname = data.target;
 };
 
 server.listen(port, () => {

@@ -1,18 +1,18 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## TCP Server
 
-### Author: Student/Group Name
+### Author: Jared
 
 ### Links and Resources
-* [repo](http://xyz.com)
+* [repo](https://github.com/jaredpattison/07-tcp-server)
 * [travis](http://xyz.com)
 * [back-end](http://xyz.com)
 * [front-end](http://xyz.com)
 
 ### Modules
-#### `modulename.js`
+#### `WillAddLaterAsTheyWillChange.js`
 ##### Exported Values and Methods
 
 ###### `foo(thing) -> string`
@@ -23,7 +23,7 @@ Usage Notes or examples
 
 ### Setup
 #### `.env` requirements
-* `PORT` - Port Number
+* `PORT` - 3001 or .env
 * `MONGODB_URI` - URL to the running mongo instance/db
 
 #### Running the app
